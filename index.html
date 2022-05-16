@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+<div id="container">
+
+</div>
+
+<form action="">
+
+    <input type="text" id="auto">
+
+    <input type="text" id="spz">
+
+    <button onclick="klikloSaTlacitko(event)">Pridaj do zoznamu</button>
+
+</form>
+
+<script>
+
+    let zoznam = JSON.parse(localStorage.getItem("zoznam"));
+
+    if(zoznam == null){
+        zoznam = [];
+    }
+
+    let containerDiv = document.getElementById("container");
+
+    for(let i = 0; i < zoznam.length; i++){
+
+    containerDiv.innerHTML += "<p>" + zoznam[i].auto + " " + zoznam[i].spz + "</p>"
+
+    }
+
+    function klikloSaTlacitko(event){
+        event.preventDefault()
+
+        //načítanie dat z id
+        let autoInput = document.getElementById("auto");
+        let spzInput = document.getElementById("spz");
+
+        
+        containerDiv.innerHTML += "<p>" + autoInput.value + " " + spzInput.value + "</p>"
+
+        zoznam.push({auto: autoInput.value, spz: spzInput.value});
+
+        console.log(zoznam);
+
+        //aby sa nam zoznam nevymazal po refresi stranky 
+        localStorage.setItem("zoznam", JSON.stringify(zoznam));
+
+    }
+
+</script>
+
+
+
+</body>
+</html>
